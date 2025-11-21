@@ -60,6 +60,31 @@
     renderTasks();
     updateProgress();
     
+    //core functions
+
+    function renderTaks() {
+        taskList.innerHTML = ''; 
+        taskData.forEach((taskObj, index) => {
+            addTaskItem(taskObj.text, taskObj.done, index);
+        });
+        }
+
+        function saveTaks() {
+            localStorage.setItem("habits", JSON.stringify(tasksData));
+        }
+        function updateProgress() {
+            const total = tasksData.length;
+            let completed =0;
+
+            taskData.forEach(task => {
+                if (task.done) completed++;
+            });
+
+            const percent = total > 0 ? Math.round((completed / total * 100)) : 0;
+            progressFill.style.width = percent + "%";
+            progressText.textContent = percent + "%";
+        }
+    
 </script>
 </body>
 </html>
